@@ -2,10 +2,8 @@ package src.main.java;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
+
+import java.io.*;
 import java.util.AbstractSequentialList;
 import java.util.ConcurrentModificationException;
 import java.util.ListIterator;
@@ -193,7 +191,6 @@ public class DoublyLinkedList<T> extends AbstractSequentialList<T>
       } else if (size == 1) {
         //Добавление второго элемента list[1]
         Node<T> newNode = new Node<>(element, first, null);
-        assert first != null;
         first.next = newNode;
         last = newNode;
       } else if (nextIndex > 0 && nextIndex < size) {
@@ -239,7 +236,7 @@ public class DoublyLinkedList<T> extends AbstractSequentialList<T>
    *
    * @param <T> тип элемента списка.
    */
-  public static class Node<T> {
+  public static class Node<T> implements Serializable {
     T item;
     Node<T> next;
     Node<T> prev;
